@@ -50,6 +50,9 @@ pub struct EstimateCmd {
     input: String,
     #[clap(arg_enum, long, short, default_value_t = OutputFormat::Human)]
     format: OutputFormat,
+
+    #[clap(required = false, long = "override", short = 'o', parse(from_str))]
+    config_overrides: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Default, Serialize)]
@@ -167,7 +170,8 @@ impl EstimateCmd {
         };
         let rdr = GCodeReader::new(BufReader::new(src));
 
-        let mut planner = opts.make_planner();
+        let cfg_overrides_copy = self.config_overrides.clone();
+        let mut planner = opts.make_planner(Some(cfg_overrides_copy));
         let mut state = EstimationState::default();
 
         for (i, cmd) in rdr.enumerate() {
@@ -403,7 +407,7 @@ impl DumpMovesCmd {
         };
         let rdr = GCodeReader::new(BufReader::new(src));
 
-        let mut planner = opts.make_planner();
+        let mut planner = opts.make_planner(None);
         let mut state = DumpMovesState {
             move_idx: 0,
             ctime: 0.1,

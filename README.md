@@ -76,6 +76,23 @@ Sequences:
    38m13.706s           => WALL-OUTER
 ```
 
+You can quickly override some basic config file settings using the config override flags
+
+Examples of override flags:
+```
+./klipper_estimator [config options] estimate ~/3DBenchy.data --override max_acceleration:15000
+./klipper_estimator [config options] estimate ~/3DBenchy.data --override max_accel:15000 --override velocity:500
+./klipper_estimator [config options] estimate ~/3DBenchy.data -o accel:15000 -o vel:500
+
+Available flags and aliases
+"max_acceleration", "max_accel", "accel" 
+"max_accel_to_decel", "accel_to_decel", "a2d"
+"max_velocity", "velocity", "max_vel", "vel"
+"square_corner_velocity", "scv", "SCV", "sqv", "SQV" 
+"instant_corner_velocity", "icv", "ICV" 
+
+```
+
 The calculations are done based only on the commands found in the file, with no
 regards for macro expansions. This means that `print_start` type macros will
 count as zero seconds, as well heat up times, homing, etc. Therefore the time

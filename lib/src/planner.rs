@@ -597,6 +597,19 @@ impl Default for PrinterLimits {
 }
 
 impl PrinterLimits {
+
+    pub fn to_string(self) -> String{
+        let re: String = vec![
+            ["Max velocity: ", &self.max_velocity.to_string()].join(": "),
+            ["Max acceleration: ", &self.max_acceleration.to_string()].join(": "),
+            ["Max accel to decel: ", &self.max_accel_to_decel.to_string()].join(": "),
+            ["Square corner vel: ", &self.square_corner_velocity.to_string()].join(": "),
+            ["Junction deviation: ", &self.junction_deviation.to_string()].join(": "),
+            ["Instant corner vel: ", &self.instant_corner_velocity.to_string()].join(": ")
+        ].join(", ");
+        re
+    }
+
     pub fn set_max_velocity(&mut self, v: f64) {
         self.max_velocity = v;
     }

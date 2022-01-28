@@ -356,7 +356,7 @@ impl PostProcessCmd {
 
         let mut runner = EstimateRunner {
             state: PostProcessState::default(),
-            planner: opts.make_planner(),
+            planner: opts.make_planner(None),
             buffer: VecDeque::new(),
         };
         runner.run(&mut rdr);
