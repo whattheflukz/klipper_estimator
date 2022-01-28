@@ -29,11 +29,8 @@ pub struct Opts {
 }
 
 impl Opts {
-
     fn printer_limits(&self, config_overrides: Option<Vec<String>>) -> &PrinterLimits {
         let cl: cfg::config_loader::Loader = cfg::config_loader::Loader::default();
-        
-        
         match self.config.get() {
             Some(limits) => limits,
             None => match cl.load_config(self.config_filename.as_ref(), self.config_moonraker.as_ref(), config_overrides) {

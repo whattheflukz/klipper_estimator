@@ -4,24 +4,16 @@ use std::error::Error;
 use lib_klipper::glam::DVec3;
 
 pub struct Loader{
-    config_overrides: Vec<(String,String)>,
     limits: PrinterLimits
 }
 
 impl Default for Loader{
     fn default() -> Loader{
-        Loader{config_overrides: Vec::new(), limits: PrinterLimits::default()}
+        Loader{limits: PrinterLimits::default()}
     }
 }
 
 impl Loader{
-
-    // pub fn get_finalized_limits(&self)-> Option<PrinterLimits >{
-    //     if self.overrides.is_empty(){
-    //         return Some(self.limits)
-    //     };
-    //     return None;
-    // } 
 
     pub fn apply_override(&mut self, override_property: String, override_value: String){
         let c = match override_property.as_str() {
@@ -63,8 +55,6 @@ impl Loader{
                 for cfg_override in i {
                     let property: String = cfg_override.get(0..cfg_override.find(':').unwrap()).unwrap().to_string(); //this is cursed i gotta make this better
                     let value: String = cfg_override.get(cfg_override.find(':').unwrap()+1..).unwrap().to_string();
-                    println!("{} : {}",property, value);
-                    // self.config_overrides.push((property,value));
                     self.apply_override(property, value);
                 }
             }
