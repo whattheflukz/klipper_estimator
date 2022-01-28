@@ -1,5 +1,5 @@
 use serde::Deserialize;
-use lib_klipper::planner::{FirmwareRetractionOptions, MoveChecker, Planner, PrinterLimits};
+use lib_klipper::planner::{FirmwareRetractionOptions, MoveChecker, PrinterLimits};
 use std::error::Error;
 use lib_klipper::glam::DVec3;
 
@@ -16,7 +16,7 @@ impl Default for Loader{
 impl Loader{
 
     pub fn apply_override(&mut self, override_property: String, override_value: String){
-        let c = match override_property.as_str() {
+        let _c = match override_property.as_str() {
             "max_acceleration" | "max_accel" | "accel" => self.limits.set_max_acceleration(override_value.parse::<f64>().unwrap()),
             "max_accel_to_decel" | "accel_to_decel" | "a2d" => self.limits.set_max_accel_to_decel(override_value.parse::<f64>().unwrap()),
             "max_velocity" | "velocity" | "max_vel" | "vel" => self.limits.set_max_velocity(override_value.parse::<f64>().unwrap()),

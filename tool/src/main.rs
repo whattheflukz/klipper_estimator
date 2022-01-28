@@ -1,11 +1,11 @@
-use std::error::Error;
+// use std::error::Error;
 
-use lib_klipper::glam::DVec3;
-use lib_klipper::planner::{FirmwareRetractionOptions, MoveChecker, Planner, PrinterLimits};
+// use lib_klipper::glam::DVec3;
+use lib_klipper::planner::{Planner, PrinterLimits};
 
 use clap::Parser;
 use once_cell::sync::OnceCell;
-use serde::Deserialize;
+// use serde::Deserialize;
 #[macro_use]
 extern crate lazy_static;
 
